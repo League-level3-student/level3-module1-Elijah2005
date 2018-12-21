@@ -59,13 +59,22 @@ public class _02_TextUndoRedo implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-
+			String text = l.getText();
+			char last = text.charAt(text.length() - 1);
+			String allButLast = text.substring(0, text.length() - 1);
+			l.setText(allButLast);
+			c.add(last);
 		} else {
 			char c2 = e.getKeyChar();
 			String text = l.getText();
 			text += c2;
 			l.setText(text + "");
 		}
+		if (e.getKeyCode() == KeyEvent.VK_Z) {
+
+			c.pop();
+		}
+
 		f.pack();
 	}
 
