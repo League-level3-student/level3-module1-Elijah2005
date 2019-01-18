@@ -11,22 +11,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class _02_TextUndoRedo implements ActionListener, KeyListener {
-	JFrame f = new JFrame();
-	JPanel p = new JPanel();
-	JLabel l = new JLabel();
-	Stack<Character> c = new Stack<Character>();
+	JFrame window = new JFrame();
+	JPanel panel = new JPanel();
+	JLabel input = new JLabel();
+	Stack<Character> character = new Stack<Character>();
 
 	public static void main(String[] args) {
-		_02_TextUndoRedo t = new _02_TextUndoRedo();
+		_02_TextUndoRedo textUndoRedo = new _02_TextUndoRedo();
 	}
 
 	_02_TextUndoRedo() {
-		f.add(p);
-		p.add(l);
-		f.setVisible(true);
-		f.addKeyListener(this);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.pack();
+		window.add(panel);
+		panel.add(input);
+		window.setVisible(true);
+		window.addKeyListener(this);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.pack();
 	}
 	/*
 	 * Create a JFrame with a JPanel and a JLabel.
@@ -59,23 +59,23 @@ public class _02_TextUndoRedo implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-			String text = l.getText();
+			String text = input.getText();
 			char last = text.charAt(text.length() - 1);
 			String allButLast = text.substring(0, text.length() - 1);
-			l.setText(allButLast);
-			c.add(last);
+			input.setText(allButLast);
+			character.push(last);
 		} else {
 			char c2 = e.getKeyChar();
-			String text = l.getText();
+			String text = input.getText();
 			text += c2;
-			l.setText(text + "");
+			input.setText(text + "");
+
 		}
 		if (e.getKeyCode() == KeyEvent.VK_Z) {
-
-			c.pop();
+		input.add(input, character.pop());
 		}
 
-		f.pack();
+		window.pack();
 	}
 
 	@Override
