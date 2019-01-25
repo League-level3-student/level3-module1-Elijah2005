@@ -64,15 +64,18 @@ public class _02_TextUndoRedo implements ActionListener, KeyListener {
 			String allButLast = text.substring(0, text.length() - 1);
 			input.setText(allButLast);
 			character.push(last);
+		} else if (e.getKeyCode() == KeyEvent.VK_UP) {
+			String text = input.getText();
+			if (!character.isEmpty()) {
+				text += character.pop();
+			}
+			input.setText(text);
 		} else {
 			char c2 = e.getKeyChar();
 			String text = input.getText();
 			text += c2;
 			input.setText(text + "");
 
-		}
-		if (e.getKeyCode() == KeyEvent.VK_Z) {
-		input.add(input, character.pop());
 		}
 
 		window.pack();

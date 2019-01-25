@@ -23,8 +23,23 @@ public class _03_TestMatchingBrackets {
 	private boolean doBracketsMatch(String b) {
 		Stack<Character> brackets = new Stack<Character>();
 		for (int i = 0; i < b.length(); i++) {
+			char character = b.charAt(i);
+			if (character == '{') {
+				brackets.push(character);
+			} else {
+				if (!brackets.isEmpty()) {
+					brackets.pop();
+				} else {
+					return false;
+				}
+			}
 
 		}
+		if (!brackets.isEmpty()) {
+			return false;
+		}
+
 		return true;
 	}
+
 }
