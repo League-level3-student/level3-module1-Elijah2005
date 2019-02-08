@@ -1,5 +1,7 @@
 package _04_HangMan;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Stack;
 
 import javax.swing.JFrame;
@@ -7,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class HangMan {
+public class HangMan implements KeyListener {
 	JFrame window = new JFrame();
 	JPanel panel = new JPanel();
 	JLabel text = new JLabel();
@@ -35,14 +37,35 @@ public class HangMan {
 			}
 		}
 
-		window.pack();
+		Setup();
 	}
 
 	void Setup() {
 		actualWord = words.pop();
 		for (int i = 0; i < actualWord.length(); i++) {
+			displayWord += "_";
+			text.setText(displayWord);
 
 		}
+		window.pack();
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
