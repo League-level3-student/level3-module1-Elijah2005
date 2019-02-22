@@ -16,6 +16,7 @@ public class HangMan implements KeyListener {
 	Stack<String> words = new Stack<String>();
 	String displayWord = "";
 	String actualWord = "";
+	int lives = 3;
 
 	public static void main(String[] args) {
 		HangMan ManHang = new HangMan();
@@ -28,6 +29,7 @@ public class HangMan implements KeyListener {
 		window.add(panel);
 		panel.add(text);
 		window.setVisible(true);
+		window.addKeyListener(this);
 		for (int i = 0; i < intput; i++) {
 			String currentWord = Utilities.readRandomLineFromFile("dictionary.txt");
 			if (words.contains(currentWord)) {
@@ -59,6 +61,19 @@ public class HangMan implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+		String newWord = "";
+		char character = e.getKeyChar();
+		for (int i = 0; i < actualWord.length(); i++) {
+			if (actualWord.charAt(i) == character) {
+				newWord += character;
+
+			} else {
+				newWord += displayWord.charAt(i);
+				lives -= 1;
+			}
+		}
+		text.setText(newWord);
+		displayWord = newWord;
 
 	}
 
