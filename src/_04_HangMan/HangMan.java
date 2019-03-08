@@ -17,7 +17,6 @@ public class HangMan implements KeyListener {
 	String displayWord = "";
 	String actualWord = "";
 	int lives = 3;
-	String currentWord = Utilities.readRandomLineFromFile("dictionary.txt");
 
 	public static void main(String[] args) {
 		HangMan ManHang = new HangMan();
@@ -40,18 +39,13 @@ public class HangMan implements KeyListener {
 				System.out.println("" + currentWord);
 			}
 		}
-		if(displayWord.equals(currentWord)) {
-			words.pop();
-			words.push(currentWord);
-			
-		}
-		
 
 		Setup();
 	}
 
 	void Setup() {
 		actualWord = words.pop();
+		displayWord = "";
 		for (int i = 0; i < actualWord.length(); i++) {
 			displayWord += "_";
 			text.setText(displayWord);
@@ -80,9 +74,16 @@ public class HangMan implements KeyListener {
 				lives -= 1;
 			}
 		}
+		if (lives == 0) {
+			System.out.println("dead");
+		}
+
 		text.setText(newWord);
 		displayWord = newWord;
+		if (displayWord.equals(actualWord)) {
+			Setup();
 
+		}
 	}
 
 	@Override
