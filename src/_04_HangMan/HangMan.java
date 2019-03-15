@@ -65,24 +65,34 @@ public class HangMan implements KeyListener {
 		// TODO Auto-generated method stub
 		String newWord = "";
 		char character = e.getKeyChar();
+		boolean correct = true;
 		for (int i = 0; i < actualWord.length(); i++) {
 			if (actualWord.charAt(i) == character) {
 				newWord += character;
 
 			} else {
-				newWord += displayWord.charAt(i);
-				lives -= 1;
+				newWord+=displayWord.charAt(i);
+				correct = false;
+
 			}
 		}
+		if(correct == false) {
+			lives -= 1;
+		}	
 		if (lives == 0) {
-			System.out.println("dead");
-		}
-
+			JOptionPane.showMessageDialog(null, "You Ran Out Of Lives GAME OVER");
+			}
+		
+		
 		text.setText(newWord);
 		displayWord = newWord;
 		if (displayWord.equals(actualWord)) {
 			Setup();
 
+		}
+		if(words.empty()) {
+			JOptionPane.showConfirmDialog(null, "Would You Like To Play Again?");
+			Setup();
 		}
 	}
 
