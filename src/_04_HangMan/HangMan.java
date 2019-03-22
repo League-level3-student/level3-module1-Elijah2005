@@ -24,12 +24,18 @@ public class HangMan implements KeyListener {
 	}
 
 	HangMan() {
-		String input = JOptionPane.showInputDialog("ENTER A Number");
-		int intput = Integer.parseInt(input);
+
 		window.add(panel);
 		panel.add(text);
 		window.setVisible(true);
 		window.addKeyListener(this);
+
+		Setup();
+	}
+
+	void DisplayWords() {
+		String input = JOptionPane.showInputDialog("ENTER A Number");
+		int intput = Integer.parseInt(input);
 		for (int i = 0; i < intput; i++) {
 			String currentWord = Utilities.readRandomLineFromFile("dictionary.txt");
 			if (words.contains(currentWord)) {
@@ -39,19 +45,18 @@ public class HangMan implements KeyListener {
 				System.out.println("" + currentWord);
 			}
 		}
-
-		Setup();
 	}
 
 	void Setup() {
+
 		actualWord = words.pop();
 		displayWord = "";
 		for (int i = 0; i < actualWord.length(); i++) {
 			displayWord += "_";
 			text.setText(displayWord);
-
 		}
 		window.pack();
+		window.setDefaultCloseOperation(window.EXIT_ON_CLOSE);
 	}
 
 	@Override
@@ -65,34 +70,38 @@ public class HangMan implements KeyListener {
 		// TODO Auto-generated method stub
 		String newWord = "";
 		char character = e.getKeyChar();
-		boolean correct = true;
+		boolean correct = false;
+		System.out.println("" + lives);
 		for (int i = 0; i < actualWord.length(); i++) {
 			if (actualWord.charAt(i) == character) {
 				newWord += character;
-
+				correct = true;
 			} else {
-				newWord+=displayWord.charAt(i);
-				correct = false;
+				newWord += displayWord.charAt(i);
 
 			}
 		}
-		if(correct == false) {
+		if (correct == false) {
 			lives -= 1;
-		}	
+		}
 		if (lives == 0) {
 			JOptionPane.showMessageDialog(null, "You Ran Out Of Lives GAME OVER");
-			}
-		
-		
+		}
+
 		text.setText(newWord);
 		displayWord = newWord;
 		if (displayWord.equals(actualWord)) {
 			Setup();
 
 		}
-		if(words.empty()) {
-			JOptionPane.showConfirmDialog(null, "Would You Like To Play Again?");
-			Setup();
+		if (words.empty()) {
+			String input = JOptionPane.showInputDialog("Would You Like To play Again");
+			if (input.equals("yes")) {
+				Setup();
+			} else {
+				window.dispose();
+			}
+
 		}
 	}
 
