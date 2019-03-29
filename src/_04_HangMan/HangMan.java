@@ -16,7 +16,7 @@ public class HangMan implements KeyListener {
 	Stack<String> words = new Stack<String>();
 	String displayWord = "";
 	String actualWord = "";
-	int lives = 3;
+	int lives = 5;
 
 	public static void main(String[] args) {
 		HangMan ManHang = new HangMan();
@@ -29,14 +29,14 @@ public class HangMan implements KeyListener {
 		panel.add(text);
 		window.setVisible(true);
 		window.addKeyListener(this);
-
+		DisplayWords();
 		Setup();
 	}
 
 	void DisplayWords() {
 		String input = JOptionPane.showInputDialog("ENTER A Number");
 		int intput = Integer.parseInt(input);
-		for (int i = 0; i < intput; i++) {
+		for (int i = -1; i < intput; i++) {
 			String currentWord = Utilities.readRandomLineFromFile("dictionary.txt");
 			if (words.contains(currentWord)) {
 				i--;
@@ -86,6 +86,16 @@ public class HangMan implements KeyListener {
 		}
 		if (lives == 0) {
 			JOptionPane.showMessageDialog(null, "You Ran Out Of Lives GAME OVER");
+			String inputs = JOptionPane.showInputDialog("Would You Like To Play Again?");
+			if (inputs.equals("yes")) {
+				DisplayWords();
+				Setup();
+				lives = 5;
+
+			} else {
+				window.dispose();
+				window.setDefaultCloseOperation(window.EXIT_ON_CLOSE);
+			}
 		}
 
 		text.setText(newWord);
@@ -95,11 +105,14 @@ public class HangMan implements KeyListener {
 
 		}
 		if (words.empty()) {
-			String input = JOptionPane.showInputDialog("Would You Like To play Again");
+			String input = JOptionPane.showInputDialog("Would You Like To Play Again?");
 			if (input.equals("yes")) {
+				DisplayWords();
 				Setup();
+				lives = 5;
 			} else {
 				window.dispose();
+				window.setDefaultCloseOperation(window.EXIT_ON_CLOSE);
 			}
 
 		}
