@@ -1,3 +1,4 @@
+
 package _00_Dynamic_Integer_Array;
 
 public class DynamicIntegerArray {
@@ -86,13 +87,14 @@ public class DynamicIntegerArray {
 		int[] array4 = new int[array.length - 1];
 		// B. make a for loop to iterate through the member array
 		for (int i = 0; i < array.length; i++) {
-		if(i<location) {
-			array4[i] = array[i];
-		} if(i > location) {
-			array4[i - 1] = array[i];
-		} else {
-			continue;
-		}
+			if (i < location) {
+				array4[i] = array[i];
+			}
+			if (i > location) {
+				array4[i - 1] = array[i];
+			} else {
+				continue;
+			}
 		}
 		array = array4;
 		// C. if i is less than location
@@ -118,8 +120,8 @@ public class DynamicIntegerArray {
 	// 12. Complete the clear array so that it sets the member array
 	// equal to a new integer array of size 0
 	public void clear() {
-	array = new int[0];	
-		
+		array = new int[0];
+
 	}
 
 	// 13. Run the test again to see if you are finished.

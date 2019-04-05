@@ -36,13 +36,13 @@ public class HangMan implements KeyListener {
 	void DisplayWords() {
 		String input = JOptionPane.showInputDialog("ENTER A Number");
 		int intput = Integer.parseInt(input);
-		for (int i = -1; i < intput; i++) {
+		for (int i = 0; i < intput; i++) {
 			String currentWord = Utilities.readRandomLineFromFile("dictionary.txt");
 			if (words.contains(currentWord)) {
 				i--;
 			} else {
 				words.push(currentWord);
-				System.out.println("" + currentWord);
+
 			}
 		}
 	}
@@ -71,7 +71,8 @@ public class HangMan implements KeyListener {
 		String newWord = "";
 		char character = e.getKeyChar();
 		boolean correct = false;
-		System.out.println("" + lives);
+		System.out.println("actual " + actualWord.length());
+		System.out.println("display " + displayWord.length());
 		for (int i = 0; i < actualWord.length(); i++) {
 			if (actualWord.charAt(i) == character) {
 				newWord += character;
@@ -81,6 +82,8 @@ public class HangMan implements KeyListener {
 
 			}
 		}
+		text.setText(newWord);
+		displayWord = newWord;
 		if (correct == false) {
 			lives -= 1;
 		}
@@ -88,18 +91,16 @@ public class HangMan implements KeyListener {
 			JOptionPane.showMessageDialog(null, "You Ran Out Of Lives GAME OVER");
 			String inputs = JOptionPane.showInputDialog("Would You Like To Play Again?");
 			if (inputs.equals("yes")) {
+				words.clear();
 				DisplayWords();
 				Setup();
 				lives = 5;
 
 			} else {
 				window.dispose();
-				window.setDefaultCloseOperation(window.EXIT_ON_CLOSE);
 			}
 		}
 
-		text.setText(newWord);
-		displayWord = newWord;
 		if (displayWord.equals(actualWord)) {
 			Setup();
 
@@ -107,12 +108,12 @@ public class HangMan implements KeyListener {
 		if (words.empty()) {
 			String input = JOptionPane.showInputDialog("Would You Like To Play Again?");
 			if (input.equals("yes")) {
+				words.clear();
 				DisplayWords();
 				Setup();
 				lives = 5;
 			} else {
 				window.dispose();
-				window.setDefaultCloseOperation(window.EXIT_ON_CLOSE);
 			}
 
 		}
