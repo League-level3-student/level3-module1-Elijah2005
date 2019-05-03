@@ -18,6 +18,7 @@ public class _06_IPodShuffle implements ActionListener {
 
 	public _06_IPodShuffle() {
 		// 1. Use the Song class the play the demo.mp3 file.
+		
 		Song koconut = new Song("koconut.mp3");
 		Song bro = new Song("Everyday Bro.mp3");
 		Song duck = new Song("The Duck Song.mp3");
@@ -28,7 +29,7 @@ public class _06_IPodShuffle implements ActionListener {
 		b.setText("Surprise Me!");
 		f.setVisible(true);
 		f.pack();
-		b.addActionListener((ActionListener) this);
+		b.addActionListener(this);
 		s1.add(koconut);
 		s1.add(bro);
 		s1.add(duck);
