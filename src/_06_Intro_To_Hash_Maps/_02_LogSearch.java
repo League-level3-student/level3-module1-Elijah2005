@@ -30,6 +30,7 @@ public class _02_LogSearch implements ActionListener {
 		addEntry.addActionListener(this);
 		searchByID.addActionListener(this);
 		viewList.addActionListener(this);
+		removeEntry.addActionListener(this);
 	
 		window.add(panel);
 		panel.add(addEntry);
@@ -49,13 +50,24 @@ public class _02_LogSearch implements ActionListener {
 		// TODO Auto-generated method stub
 	
 		if(e.getSource()==addEntry) {
+		ID = JOptionPane.showInputDialog("ENTER an ID Number");
+		int ID2 = Integer.parseInt(ID);
 		name = JOptionPane.showInputDialog("ENTER a Name");
+		search.put(ID2, name);
 		}
 		if(e.getSource()==searchByID) {
-		ID = JOptionPane.showInputDialog("ENTER an ID Number");
+			String ID1 = JOptionPane.showInputDialog("ENTER an ID Number");
+			int ID3 = Integer.parseInt(ID1);
+			if(search.keySet().contains(ID3)) {
+				System.out.println(" " + search.get(ID3));
+			}else {
+				System.out.println("That Entry Does Not Exist");
+			}
 		}
 		if(e.getSource()==viewList) {
-		System.out.println("ID: " + ID + " Name: " + name);
+		for (int i = 0; i < search.size(); i++) {
+		JOptionPane.showMessageDialog(null, " ID: " + search.get(name) + " Name: " + search.get(ID));
+		}
 		}
 		if(e.getSource()==removeEntry) {
 		remove = JOptionPane.showInputDialog("ENTER a ID to Delete");
@@ -69,6 +81,7 @@ public class _02_LogSearch implements ActionListener {
 	}
 		window.setDefaultCloseOperation(window.EXIT_ON_CLOSE);
 	}
+
 
 	/*
 	 * Crate a HashMap of Integers for the keys and Strings for the values. Create a
