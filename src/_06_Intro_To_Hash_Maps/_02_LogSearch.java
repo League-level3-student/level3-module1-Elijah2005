@@ -59,15 +59,17 @@ public class _02_LogSearch implements ActionListener {
 			String ID1 = JOptionPane.showInputDialog("ENTER an ID Number");
 			int ID3 = Integer.parseInt(ID1);
 			if(search.keySet().contains(ID3)) {
-				System.out.println(" " + search.get(ID3));
+				JOptionPane.showMessageDialog(null ," " + search.get(ID3));
 			}else {
 				System.out.println("That Entry Does Not Exist");
 			}
 		}
 		if(e.getSource()==viewList) {
-		for (int i = 0; i < search.size(); i++) {
-		JOptionPane.showMessageDialog(null, " ID: " + search.get(name) + " Name: " + search.get(ID));
+			String names = "";
+		for (int i:search.keySet()) {
+		names+= "ID: " + i + " Name: " + search.get(i)+ "\n";
 		}
+		JOptionPane.showMessageDialog(null, " " + names);
 		}
 		if(e.getSource()==removeEntry) {
 		remove = JOptionPane.showInputDialog("ENTER a ID to Delete");
